@@ -6,12 +6,14 @@ import LoginController from './LoginController';
 import '../_components/Components';
 import usernameInput from './_components/usernameInput';
 import passwordInput from './_components/passwordInput';
+import Services from '../_services/Services';
 
 const Login = angular.module('Login',
   [
     'ui.router',
     'ngMessages',
-    'Components'
+    'Components',
+    'Services'
   ])
   .controller('LoginController', LoginController)
   .directive('usernameInput', usernameInput)
