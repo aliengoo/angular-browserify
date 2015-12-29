@@ -7,8 +7,8 @@ export default
       </page-header>
 
       <form name="loginForm" novalidate ng-submit="vm.login()">
-        <username-input username="vm.username"></username-input>
-        <password-input password="vm.password"></password-input>
+        <login-username-input credentials="vm.credentials"></login-username-input>
+        <login-password-input credentials="vm.credentials"></login-password-input>
 
         <button class="btn btn-primary" type="submit" ng-disabled="vm.loading || loginForm.$invalid">
           Login <i ng-class="{'fa fa-spinner fa-spin': vm.loading}"></i>

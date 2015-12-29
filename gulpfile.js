@@ -4,6 +4,7 @@ var lp = require('gulp-load-plugins')({
 });
 var browserify = require('browserify');
 var babelify = require('babelify');
+var ngAnnotatify = require('browserify-ngannotate');
 var watchify = require('watchify');
 var path = require('path');
 var source = require('vinyl-source-stream');
@@ -30,7 +31,8 @@ gulp.task('vendor:css', ['vendor:fonts'], function () {
   var src = [
     'node_modules/animate.css/animate.css',
     'node_modules/font-awesome/css/font-awesome.css',
-    'node_modules/bootstrap/dist/css/bootstrap.css'
+    'node_modules/bootstrap/dist/css/bootstrap.css',
+    'node_modules/angular-toastr/dist/angular-toastr.css'
   ];
 
   return gulp.src(src)
@@ -73,8 +75,8 @@ gulp.task("build:js", function (done) {
 
   watchify(browserify(path.join("./client", "App.js"), args), args)
     .transform(babelify)
+    .transform(ngAnnotatify)
     .bundle()
-    .pipe(exorcist(mapfile))
     .on('error', function(err){
       console.error(err.message);
       notifier.notify({
@@ -84,6 +86,7 @@ gulp.task("build:js", function (done) {
       });
       done();
     })
+    .pipe(exorcist(mapfile))
     .pipe(source("app.js"))
     .pipe(gulp.dest("./public/js"))
     .pipe(lp.livereload()).on('end', function(){

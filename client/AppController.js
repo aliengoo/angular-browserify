@@ -1,5 +1,7 @@
-export default class AppController {
+class AppController {
   constructor() {
-    console.log("AppController has loaded");
+    console.info("AppController has loaded");
   }
 }
+
+export default AppController;

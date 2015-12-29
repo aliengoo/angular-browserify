@@ -6,7 +6,7 @@ export default function errorBlock() {
     scope: true,
     template:
       `
-        <div class="error-block" ng-show="form.$dirty" ng-transclude>
+        <div class="error-block" ng-transclude>
         </div>
       `,
     link: (scope, elements, attributes, formController) => {

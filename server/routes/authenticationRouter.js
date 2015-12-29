@@ -11,7 +11,7 @@ let UserAdapter = require('../pg-db/adapters/UserAdapter');
 let tokenAdapter = new TokenAdapter(models);
 let userAdapter = new UserAdapter(models);
 
-router.post('/api/auth/logout', (req, res) => {
+router.delete('/api/auth/logout', (req, res) => {
   tokenAdapter.destroy(req.token)
     .then(() => res.json({
       success: true
