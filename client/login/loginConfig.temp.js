@@ -3,7 +3,7 @@ import LoginController from './LoginController';
 import LoginTemplate from './LoginTemplate';
 
 function LoginConfig($stateProvider) {
-  $stateProvider.state('/login', {
+  $stateProvider.state('login', {
     url: '/login',
     controller: LoginController,
     controllerAs: "vm",
