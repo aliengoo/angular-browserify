@@ -10,7 +10,7 @@ export default
         <username-input username="vm.username"></username-input>
         <password-input password="vm.password"></password-input>
 
-        <button class="btn btn-primary" type="submit">
+        <button class="btn btn-primary" type="submit" ng-disabled="vm.loading || loginForm.$invalid">
           Login <i ng-class="{'fa fa-spinner fa-spin': vm.loading}"></i>
         </button>
       </form>
