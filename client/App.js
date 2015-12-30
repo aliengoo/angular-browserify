@@ -4,22 +4,23 @@ global.$ = global.jQuery;
 import _ from 'lodash';
 
 import angular from 'angular';
-import 'angular-ui-router';
 import 'angular-animate';
-import './views/Views';
+import 'angular-new-router';
 import './_services/Services';
+import './components/home/Home';
+import './components/login/Login';
+import './components/registration/Registration';
 import 'angular-local-storage';
 import AppController from './AppController';
 
 import accessTokenInterceptor from './_services/accessTokenInterceptor';
 
+
 /* @ngInject */
-function appConfig($httpProvider, $urlRouterProvider, localStorageServiceProvider, $logProvider) {
+function appConfig($httpProvider, localStorageServiceProvider, $logProvider) {
 
   $httpProvider.interceptors.push(accessTokenInterceptor);
   $httpProvider.useLegacyPromiseExtensions = false;
-
-  $urlRouterProvider.otherwise('/login');
 
   localStorageServiceProvider.setPrefix('angular-browserify.app');
   localStorageServiceProvider.setStorageType('localStorage'); // default
@@ -30,10 +31,12 @@ function appConfig($httpProvider, $urlRouterProvider, localStorageServiceProvide
 /* @ngInject */
 const App = angular.module('App',
   [
-    'ui.router',
+    'ngNewRouter',
     'LocalStorageModule',
     'Services',
-    'Views'
+    'Home',
+    'Login',
+    'Registration'
   ]);
 
 App.controller('AppController', AppController);
