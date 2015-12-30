@@ -1,13 +1,14 @@
 import angular from 'angular';
+import '../_services/Services';
+
 import pageHeader from './PageHeader';
 import formGroup from './formGroup';
 import controlLabel from './controlLabel';
 import errorBlock from './errorBlock';
-
 import authenticatedNavbar from './navbar/authenticatedNavbar';
 import navbar from './navbar/navbar';
 
-const Components = angular.module('Components', [])
+const Components = angular.module('Components', ['Services'])
   .directive('formGroup', formGroup)
   .directive('controlLabel', controlLabel)
   .directive('errorBlock', errorBlock)

@@ -8,13 +8,14 @@ import 'angular-animate';
 import 'angular-new-router';
 import './_services/Services';
 import './components/home/Home';
+import './components/about/About';
 import './components/login/Login';
+import './components/products/Products';
 import './components/registration/Registration';
 import 'angular-local-storage';
 import AppController from './AppController';
 
 import accessTokenInterceptor from './_services/accessTokenInterceptor';
-
 
 /* @ngInject */
 function appConfig($httpProvider, localStorageServiceProvider, $logProvider) {
@@ -35,6 +36,8 @@ const App = angular.module('App',
     'LocalStorageModule',
     'Services',
     'Home',
+    'About',
+    'Products',
     'Login',
     'Registration'
   ]);

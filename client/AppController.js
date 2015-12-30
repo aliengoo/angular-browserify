@@ -10,7 +10,8 @@ class AppController {
 
       // authenticated routes
       {path: '/home', component: 'home'},
-      {path: '/about', component: 'about'}
+      {path: '/about', component: 'about'},
+      {path: '/products', component: 'products'}
     ]);
   }
 }

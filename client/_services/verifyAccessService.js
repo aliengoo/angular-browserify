@@ -1,4 +1,3 @@
-
 /* @ngInject */
 function verifyAccessService($http, $q, $log, navigationService) {
   return {

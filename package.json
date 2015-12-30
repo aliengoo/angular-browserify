@@ -26,6 +26,7 @@
     "express-validator": "^2.18.0",
     "font-awesome": "^4.5.0",
     "gsap": "^1.18.2",
+    "immutable": "^3.7.6",
     "jquery": "^2.1.4",
     "jsonwebtoken": "^5.4.1",
     "mongoose": "^4.3.4",

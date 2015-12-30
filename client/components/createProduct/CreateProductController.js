@@ -1,9 +1,6 @@
-class AboutController {
-  /* @ngInject */
+class CreateProductController {
   constructor(verifyAccessService, $router) {
-    this.name = 'about';
+    this.name = "createProduct";
     this.canActivate = verifyAccessService.canActivateFn($router);
   }
 }
-
-export default AboutController;

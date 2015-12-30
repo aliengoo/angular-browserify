@@ -1,9 +1,10 @@
-class AboutController {
+class ProductsController {
   /* @ngInject */
   constructor(verifyAccessService, $router) {
-    this.name = 'about';
+    this.name = "products";
+    this.loading = false;
     this.canActivate = verifyAccessService.canActivateFn($router);
   }
 }
 
-export default AboutController;
+export default ProductsController;
