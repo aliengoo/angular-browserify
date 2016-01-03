@@ -1,16 +1,14 @@
 import angular from 'angular';
+import 'angular-ui-router';
 import HomeController from './HomeController';
 import '../../_services/Services';
 import '../../_constants/Constants';
 
 import template from './home.html';
 
-function homeRun($templateCache) {
-  $templateCache.put('./components/home/home.html', template);
-}
 
 const Home = angular.module('Home', [
-  'ngNewRouter',
+  'ui.router',
   'ngAnimate',
   'ngMessages',
   'toastr',
@@ -19,7 +17,15 @@ const Home = angular.module('Home', [
   'Services'
 ]);
 
-Home.run(homeRun);
-Home.controller('HomeController', HomeController);
+/* @ngInject */
+function homeConfig($stateProvider) {
+  $stateProvider.state('home', {
+    url: '/home',
+    controller: HomeController,
+    template
+  });
+}
+
+Home.config(homeConfig);
 
 export default Home;

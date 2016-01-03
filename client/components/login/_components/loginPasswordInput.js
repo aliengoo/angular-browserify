@@ -1,32 +1,11 @@
-export default function passwordInput() {
+import template from './loginPasswordInput.html';
+
+export default function loginPasswordInput() {
   return {
     restrict: 'E',
     scope: {
       credentials: '='
     },
-    template:
-      `
-        <div ng-form="passwordInputForm">
-          <form-group>
-            <control-label>Password</control-label>
-
-            <input
-              type="password"
-              class="form-control"
-              required
-              maxlength="50"
-              ng-model="credentials.password"
-              name="password"
-              ng-model-options="{'debounce': 500}">
-
-            <error-block>
-              <ng-messages for="passwordInputForm.password.$error" role="alert">
-                <ng-message when="required">Password is required</ng-message>
-              </ng-messages>
-            </error-block>
-          </form-group>
-
-        </div>
-      `
+    template
   };
 }

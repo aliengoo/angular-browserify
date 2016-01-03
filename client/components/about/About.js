@@ -1,5 +1,5 @@
 import angular from 'angular';
-import 'angular-new-router';
+import 'angular-ui-router';
 import '../../_components/Components';
 import '../../_services/Services';
 import '../../_constants/Constants';
@@ -7,18 +7,21 @@ import '../../_constants/Constants';
 import AboutController from './AboutController';
 import template from './about.html';
 
-/* @ngInject */
-function aboutRun($templateCache) {
-  $templateCache.put('./components/about/about.html', template);
-}
-
 const About = angular.module('About', [
-  'ngNewRouter',
+  'ui.router',
   'Services',
   'Components',
   'Constants']);
 
-About.controller('AboutController', AboutController);
-About.run(aboutRun);
+function aboutConfig($stateProvider) {
+  $stateProvider.state('about', {
+    url: '/about',
+    controller: AboutController,
+    controllerAs: "about",
+    template
+  });
+}
+
+About.config(aboutConfig);
 
 export default About;

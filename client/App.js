@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 import angular from 'angular';
 import 'angular-animate';
-import 'angular-new-router';
+import 'angular-ui-router';
 import './_services/Services';
 import './components/home/Home';
 import './components/about/About';
@@ -32,7 +32,7 @@ function appConfig($httpProvider, localStorageServiceProvider, $logProvider) {
 /* @ngInject */
 const App = angular.module('App',
   [
-    'ngNewRouter',
+    'ui.router',
     'LocalStorageModule',
     'Services',
     'Home',

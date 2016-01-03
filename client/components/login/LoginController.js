@@ -1,14 +1,14 @@
-class LoginController {
+export default class LoginController {
   /* @ngInject */
-  constructor($router, $location, $log, toastr, loginService) {
-    this.$router = $router;
+  constructor($state, $location, $log, toastr, loginService) {
+    this.$state = $state;
     this.$location = $location;
     this.name = "login";
     this.$log = $log;
     this.loginService = loginService;
     this.toastr = toastr;
     this.credentials = {
-      username: 'glenn@phooby.net', password: 'trustno1'
+      username: 'test@test.com', password: 'trustno1'
     };
     this.loading = false;
   }
@@ -17,11 +17,7 @@ class LoginController {
     this.loading = true;
 
     this.loginService.login(this.credentials).then(() => {
-      this.$router.navigate('home').then((url) => {
-        this.$location.url(url);
-      }, (error) => {
-        this.$log.error(error);
-      });
+      this.$state.go('home');
     }, (res) => {
       if (res.status === 401) {
         this.toastr.error('Invalid username or password', 'Login Failed');
@@ -34,5 +30,3 @@ class LoginController {
     });
   }
 }
-
-export default LoginController;

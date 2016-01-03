@@ -1,6 +1,6 @@
 import angular from 'angular';
 import 'angular-messages';
-import 'angular-new-router';
+import 'angular-ui-router';
 
 // module imports
 import '../../_services/Services';
@@ -14,23 +14,32 @@ import loginPasswordInput from './_components/loginPasswordInput';
 import loginService from './loginService';
 import template from './login.html';
 
-function loginRun($templateCache) {
-  $templateCache.put('./components/login/login.html', template);
-}
 
 const Login = angular.module('Login',
   [
-    'ngNewRouter',
+    'ui.router',
     'ngAnimate',
     'ngMessages',
     'Components',
     'Constants',
     'Services'
-  ])
+  ]);
+
+/* @ngInject */
+function loginConfig($stateProvider) {
+  $stateProvider.state('login', {
+    url: '/login',
+    controller: LoginController,
+    controllerAs: "login",
+    template
+  });
+}
+
+Login
   .directive('loginUsernameInput', loginUsernameInput)
   .directive('loginPasswordInput', loginPasswordInput)
   .service('loginService', loginService)
   .controller('LoginController', LoginController)
-  .run(loginRun);
+  .confg(loginConfig);
 
 export default Login;
