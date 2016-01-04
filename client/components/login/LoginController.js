@@ -1,12 +1,11 @@
 export default class LoginController {
   /* @ngInject */
-  constructor($state, $log, toastr, loginService, DefaultAuthorizedStateName) {
+  constructor($state, $log, userNotifierService, loginService, DefaultAuthorizedStateName) {
     this.$state = $state;
-    this.name = "login";
     this.$log = $log;
+    this.userNotifierService = userNotifierService;
     this.loginService = loginService;
     this.DefaultAuthorizedStateName = DefaultAuthorizedStateName;
-    this.toastr = toastr;
     this.credentials = {
       username: "test@test.com", password: "trustno1"
     };
@@ -18,16 +17,16 @@ export default class LoginController {
 
     // success
     const redirectUserToDefaultAuthorizedState = () => {
-      this.$log.info("login successful");
       this.$state.go(this.DefaultAuthorizedStateName);
+      this.userNotifierService.info("You're logged in", "Login Successful");
     };
 
     // error
     const informUserSomethingWentWrong = (res) => {
       if (res.isUnauthorized()) {
-        this.toastr.error(`Invalid username or password`, 'Login Failed');
+        this.userNotifierService.error(`Invalid username or password`, "Login Failed");
       } else {
-        this.toastr.error(`The server responded with ${res.status} - ${res.statusText}`, 'Login Error');
+        this.userNotifierService.error(`The server responded with ${res.status} - ${res.statusText}`, "Login Error");
         this.$log.error(res);
       }
     };

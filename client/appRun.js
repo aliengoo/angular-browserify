@@ -1,3 +1,4 @@
+/* @ngInject */
 export default function appRun($rootScope, $log, $state, $q, verifyAccessService, OnVerificationErrorStateName) {
 
   let _canceller;

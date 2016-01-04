@@ -1,24 +1,24 @@
 export default class LogoutService {
   /* @ngInject */
-  constructor($http, $log, $state, storageService, AccessTokenKey, toastr, DefaultUnauthorizedStateName) {
+  constructor($http, $log, $state, storageService, AccessTokenKey, userNotifierService, DefaultUnauthorizedStateName) {
     this.$http = $http;
     this.$log = $log;
     this.$state = $state;
     this.storageService = storageService;
     this.AccessTokenKey = AccessTokenKey;
     this.DefaultUnauthorizedStateName = DefaultUnauthorizedStateName;
-    this.toastr = toastr;
+    this.userNotifierService = userNotifierService;
   }
 
   logout() {
     const redirectUserToDefaultUnauthorizedState = () => {
-      this.$log.info("Logged out");
+      this.userNotifierService.info("You've logged out", "Logout Successful");
       this.$state.go(this.DefaultUnauthorizedStateName);
     };
 
     const informUserThatSomethingWhenWrong = (res) => {
-      this.$log.error("There was a problem logging you out:", res);
-      this.toastr.info("Sorry, there was a problem during logout", "Server Error");
+      this.userNotifierService.info("Sorry, there was a problem during logout", "Server Error");
+      this.$log.error(res);
     };
 
     const alwaysClearTheAccessToken = () => this.storageService.set(this.AccessTokenKey, undefined);
