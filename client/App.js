@@ -5,7 +5,7 @@ global.$ = global.jQuery;
 
 // vendor level dependencies
 import _ from "lodash";
-import angular from "angular";
+import * as angular from "angular";
 import "angular-animate";
 import "angular-ui-router";
 import "angular-local-storage";

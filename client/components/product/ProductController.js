@@ -1,4 +1,3 @@
-
 export default class ProductController {
   /* @ngInject */
   constructor($state, $stateParams, $log, productService, product) {

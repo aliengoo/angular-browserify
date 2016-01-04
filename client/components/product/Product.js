@@ -1,5 +1,5 @@
 // vendor dependencies
-import angular from "angular";
+import * as angular from "angular";
 
 // application dependencies
 import Services from "../../_services/Services";
@@ -9,8 +9,8 @@ import Constants from "../../_constants/Constants";
 // module dependencies
 import ProductController from "./ProductController";
 import productService from "./productService";
-import newProductTemplate from "./new-product.html";
-import existingProductTemplate from "./existing-product.html";
+import * as newProductTemplate from "./new-product.html";
+import * as existingProductTemplate from "./existing-product.html";
 
 const Product = angular.module("Product", [
   // vendor modules
