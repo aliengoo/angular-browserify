@@ -1,5 +1,5 @@
 // vendor dependencies
-import * as angular from "angular";
+import angular from "angular";
 
 // application dependencies
 import Services from "../../_services/Services";
