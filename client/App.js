@@ -1,49 +1,67 @@
-global.angular = require('angular');
-global.jQuery = require('jquery');
+// globals references
+global.angular = require("angular");
+global.jQuery = require("jquery");
 global.$ = global.jQuery;
-import _ from 'lodash';
 
-import angular from 'angular';
-import 'angular-animate';
-import 'angular-ui-router';
-import './_services/Services';
-import './components/home/Home';
-import './components/about/About';
-import './components/login/Login';
-import './components/products/Products';
-import './components/registration/Registration';
-import 'angular-local-storage';
-import AppController from './AppController';
+// vendor level dependencies
+import _ from "lodash";
+import angular from "angular";
+import "angular-animate";
+import "angular-ui-router";
+import "angular-local-storage";
 
-import accessTokenInterceptor from './_services/accessTokenInterceptor';
+// application level dependencies
+import Services from "./_services/Services";
+import Home from "./components/home/Home";
+import About from "./components/about/About";
+import Login from "./components/login/Login";
+import Products from "./components/products/Products";
+import Registration from "./components/registration/Registration";
+import accessTokenInterceptor from "./_services/accessTokenInterceptor";
+
+// module level dependencies
+import AppController from "./AppController";
+
+/* @ngInject */
+const App = angular.module("App",
+  [
+    // vendor modules
+    "ui.router",
+    "LocalStorageModule",
+
+    // application modules
+    Services.name,
+    Home.name,
+    About.name,
+    Products.name,
+    Login.name,
+    Registration.name
+  ]);
+
 
 /* @ngInject */
 function appConfig($httpProvider, localStorageServiceProvider, $logProvider) {
 
+  // Intercept all requests to the server, and assign the "x-access-token"; if available
   $httpProvider.interceptors.push(accessTokenInterceptor);
+
+  // disable use of "success" and "error" methods on promise returned from $http
+  // See https://docs.angularjs.org/error/$http/legacy
   $httpProvider.useLegacyPromiseExtensions = false;
 
-  localStorageServiceProvider.setPrefix('angular-browserify.app');
-  localStorageServiceProvider.setStorageType('localStorage'); // default
+  // prefix local storage with the application name
+  localStorageServiceProvider.setPrefix("angular-browserify.app");
+  localStorageServiceProvider.setStorageType("localStorage"); // default
 
+  // enable debug
+  // TODO: Update gulpfile to inject the appropriate setting for production builds
   $logProvider.debugEnabled(true);
 }
 
-/* @ngInject */
-const App = angular.module('App',
-  [
-    'ui.router',
-    'LocalStorageModule',
-    'Services',
-    'Home',
-    'About',
-    'Products',
-    'Login',
-    'Registration'
-  ]);
-
-App.controller('AppController', AppController);
 App.config(appConfig);
+
+// AppController is declared on the body element, is not state dependent, and therefore must be explicitly bound to the module
+App.controller("AppController", AppController);
 
 
 

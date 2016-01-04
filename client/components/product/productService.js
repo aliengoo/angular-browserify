@@ -17,5 +17,4 @@ export default function productService($http) {
       return $http.delete(`api/product/${id}`);
     }
   };
-
 }

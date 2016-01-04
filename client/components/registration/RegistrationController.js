@@ -2,7 +2,7 @@ class RegistrationController {
 
   /* @ngInject */
   constructor($log, registrationService, toastr) {
-    this.name = 'registration';
+    this.name = "registration";
 
     this.credentials = {
       username: null, password: null
@@ -19,8 +19,9 @@ class RegistrationController {
 
     this.registrationService.register(this.credentials)
       .then(() => {
-        this.$state.go('login');
-      }, (res) => {
+        //noinspection JSCheckFunctionSignatures
+        this.$state.go("login");
+      }, res => {
         this.toastr.error(res.statusText, "Registration Error");
       }).finally(() => {
       this.loading = false;

@@ -1,4 +1,4 @@
-import Immutable from 'immutable';
+// TODO: productsServices
 
 const DefaultState = {
   filter: {},

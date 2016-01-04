@@ -1,27 +1,36 @@
-import angular from 'angular';
-import 'angular-new-router';
-import 'angular-toastr';
+import angular from "angular";
+import "angular-ui-router";
+import "angular-toastr";
 
-import registrationService from './registrationService';
-import RegistrationController from './RegistrationController';
+import registrationService from "./registrationService";
+import RegistrationController from "./RegistrationController";
 
-import registrationPasswordInput from './_components/registrationPasswordInput';
-import registrationUsernameInput from './_components/registrationUsernameInput';
-import template from './registration.html';
-
-function registrationRun($templateCache) {
-  $templateCache.put('./components/registration/registration.html', template);
-}
+import registrationPasswordInput from "./_components/registrationPasswordInput";
+import registrationUsernameInput from "./_components/registrationUsernameInput";
+import template from "./registration.html";
 
 // module declaration
-const Registration = angular.module('Registration', ['Services', 'toastr', 'ngNewRouter']);
+const Registration = angular.module("Registration", [
+  "Services",
+  "toastr",
+  "ui.router"]
+);
 
-Registration.service('registrationService', registrationService);
+/* @ngInject */
+function registrationConfig($stateProvider) {
+  $stateProvider.state("registration", {
+    url: "/registration",
+    controller: RegistrationController,
+    controllerAs: "registration",
+    template
+  });
+}
 
-Registration.controller('RegistrationController', RegistrationController);
+Registration.config(registrationConfig);
 
-Registration.directive('registrationUsernameInput', registrationUsernameInput);
-Registration.directive('registrationPasswordInput', registrationPasswordInput);
-Registration.run(registrationRun);
+Registration.service("registrationService", registrationService);
+
+Registration.directive("registrationUsernameInput", registrationUsernameInput);
+Registration.directive("registrationPasswordInput", registrationPasswordInput);
 
 export default Registration;

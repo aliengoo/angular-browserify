@@ -1,13 +1,29 @@
-import angular from 'angular';
-import '../../_services/Services';
-import '../../_components/Components';
-import '../../_constants/Constants';
-import ProductController from './ProductController';
-import productService from './productService';
-import newProductTemplate from './new-product.html';
-import existingProductTemplate from './existing-product.html';
+// vendor dependencies
+import angular from "angular";
 
-const Product = angular.module('Product', ['ui.router', 'ngAnimate', 'ngMessages', 'toastr']);
+// application dependencies
+import Services from "../../_services/Services";
+import Components from  "../../_components/Components";
+import Constants from "../../_constants/Constants";
+
+// module dependencies
+import ProductController from "./ProductController";
+import productService from "./productService";
+import newProductTemplate from "./new-product.html";
+import existingProductTemplate from "./existing-product.html";
+
+const Product = angular.module("Product", [
+  // vendor modules
+  "ui.router",
+  "ngAnimate",
+  "ngMessages",
+  "toastr",
+
+  // application modules
+  Services.name,
+  Components.name,
+  Constants.name
+]);
 
 /* @ngInject */
 function productConfig($stateProvider) {
