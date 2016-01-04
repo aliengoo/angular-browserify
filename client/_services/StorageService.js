@@ -23,7 +23,7 @@ export default class Storage {
    * @returns {Promise}
    */
   get(key, defaultValue = undefined) {
-    let value = this.localStorageService.get() || defaultValue;
+    let value = this.localStorageService.get(key) || defaultValue;
     return this.$q.when(value);
   }
 

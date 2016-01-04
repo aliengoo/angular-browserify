@@ -31,7 +31,6 @@ export default function appRun($rootScope, $log, $state, $q, verifyAccessService
         // if the _lastStateName is the current state name, do nothing
         if (_lastStateName !== toState.name) {
           continueToState();
-          _lastStateName = toState.name;
         }
       };
 
@@ -61,4 +60,8 @@ export default function appRun($rootScope, $log, $state, $q, verifyAccessService
   }
 
   $rootScope.$on("$stateChangeStart", onStateChangeStart);
+
+  $rootScope.$on("$stateChangeSuccess", (event, toState) => {
+    _lastStateName = toState.name;
+  });
 };

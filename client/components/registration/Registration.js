@@ -7,7 +7,7 @@ import "angular-toastr";
 import Services from "../../_services/Services";
 
 // module dependencies
-import registrationService from "./registrationService";
+import RegistrationService from "./RegistrationService";
 import RegistrationController from "./RegistrationController";
 
 import registrationPasswordInput from "./_components/registrationPasswordInput";
@@ -34,7 +34,7 @@ function registrationConfig($stateProvider) {
 
 Registration.config(registrationConfig);
 
-Registration.service("registrationService", registrationService);
+Registration.service("registrationService", RegistrationService);
 
 Registration.directive("registrationUsernameInput", registrationUsernameInput);
 Registration.directive("registrationPasswordInput", registrationPasswordInput);

@@ -10,8 +10,7 @@ import Components from "../../_components/Components";
 import LoginController from './LoginController';
 import loginUsernameInput from "./_components/loginUsernameInput";
 import loginPasswordInput from "./_components/loginPasswordInput";
-import loginService from "./loginService";
-import LoginServiceTest from "./LoginServiceTest";
+import LoginService from "./LoginService";
 import template from "./login.html";
 
 const Login = angular.module("Login", [
@@ -39,8 +38,7 @@ function loginConfig($stateProvider) {
 Login
   .directive('loginUsernameInput', loginUsernameInput)
   .directive('loginPasswordInput', loginPasswordInput)
-  .service('loginService', loginService)
-  .service('loginServiceTest', LoginServiceTest)
+  .service('loginService', LoginService)
   .config(loginConfig);
 
 export default Login;

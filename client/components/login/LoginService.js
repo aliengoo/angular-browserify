@@ -1,5 +1,5 @@
 
-export default class LoginServiceTest {
+export default class LoginService {
   /* @ngInject */
   constructor($http, $q, $log, AccessTokenKey, storageService) {
     this.$http = $http;
@@ -12,31 +12,21 @@ export default class LoginServiceTest {
   }
 
   _wasAuthenticationSuccessful(res) {
-    return this.$q.when(res.get("success", false))
+    return this.$q.when(res.getDataValue("success", false))
       .then(
         () => res,
         () => this.$q.reject(res));
   }
 
   _storeAccessToken(res) {
-    return this.storageService.set(this.AccessTokenKey, res.get("token")).then(
+    return this.storageService.set(this.AccessTokenKey, res.getDataValue("token")).then(
       () => res
     );
   }
 
   login(credentials) {
-    const defer = this.$q.defer();
-
-    const catchError = (res) => defer.reject(res);
-
-    const promise = this.$http.post("/api/authenticate", credentials);
-
-    promise
+    return this.$http.post("/api/authenticate", credentials)
       .then(this._wasAuthenticationSuccessful)
-      .then(this._storeAccessToken)
-      .then(defer.resolve)
-      .catch(catchError);
-
-    return defer.promise;
+      .then(this._storeAccessToken);
   }
 }

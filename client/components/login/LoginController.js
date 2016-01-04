@@ -1,11 +1,11 @@
 export default class LoginController {
   /* @ngInject */
-  constructor($state, $log, toastr, loginService, loginServiceTest) {
+  constructor($state, $log, toastr, loginService, DefaultAuthorizedStateName) {
     this.$state = $state;
     this.name = "login";
     this.$log = $log;
     this.loginService = loginService;
-    this.loginServiceTest = loginServiceTest;
+    this.DefaultAuthorizedStateName = DefaultAuthorizedStateName;
     this.toastr = toastr;
     this.credentials = {
       username: "test@test.com", password: "trustno1"
@@ -16,17 +16,28 @@ export default class LoginController {
   login() {
     this.loading = true;
 
-    this.loginServiceTest.login(this.credentials).then(() => {
-      this.$state.go('home');
-    }, (res) => {
+    // success
+    const redirectUserToDefaultAuthorizedState = () => {
+      this.$log.info("login successful");
+      this.$state.go(this.DefaultAuthorizedStateName);
+    };
+
+    // error
+    const informUserSomethingWentWrong = (res) => {
       if (res.isUnauthorized()) {
         this.toastr.error(`Invalid username or password`, 'Login Failed');
       } else {
         this.toastr.error(`The server responded with ${res.status} - ${res.statusText}`, 'Login Error');
         this.$log.error(res);
       }
-    }).finally(() => {
-      this.loading = false;
-    });
+    };
+
+    // finally
+    const endLoadingState = () => this.loading = false;
+
+    this.loginService.login(this.credentials).then(
+      redirectUserToDefaultAuthorizedState,
+      informUserSomethingWentWrong)
+      .finally(endLoadingState);
   }
 }

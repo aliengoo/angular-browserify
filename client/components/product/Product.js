@@ -8,7 +8,7 @@ import Constants from "../../_constants/Constants";
 
 // module dependencies
 import ProductController from "./ProductController";
-import productService from "./productService";
+import ProductService from "./ProductService";
 import * as newProductTemplate from "./new-product.html";
 import * as existingProductTemplate from "./existing-product.html";
 
@@ -51,7 +51,7 @@ function productConfig($stateProvider) {
 }
 
 Product.config(productConfig);
-Product.service('productService', productService);
+Product.service('productService', ProductService);
 
 export default Product;
 

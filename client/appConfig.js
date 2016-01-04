@@ -2,10 +2,10 @@
 export default function appConfig($httpProvider, localStorageServiceProvider, $logProvider) {
 
   // Intercept all requests to the server, and assign the "x-access-token"; if available
-  $httpProvider.interceptors.push("accessTokenInterceptor");
+  $httpProvider.interceptors.push("accessTokenInterceptorService");
 
   // extends the response from the server with convenient functions
-  $httpProvider.interceptors.push("responseExtendInterceptor");
+  $httpProvider.interceptors.push("responseExtendInterceptorService");
 
   // disable use of "success" and "error" methods on promise returned from $http
   // See https://docs.angularjs.org/error/$http/legacy

@@ -3,20 +3,20 @@ import 'angular-local-storage';
 
 import Constants from "../_constants/Constants";
 
-import logoutService from "./logoutService";
+import LogoutService from "./LogoutService";
 import StorageService from "./StorageService";
-import verifyAccessService from "./verifyAccessService";
+import VerifyAccessService from "./VerifyAccessService";
 
-import accessTokenInterceptor from "./_interceptors/accessTokenInterceptor";
-import responseExtendInterceptor from "./_interceptors/responseExtendInterceptor";
+import AccessTokenInterceptorService from "./AccessTokenInterceptorService";
+import ResponseExtendInterceptorService from "./ResponseExtendInterceptorService";
 
 const Services = angular.module('Services', ['Constants', 'LocalStorageModule']);
 
 Services
   .service("storageService", StorageService)
-  .service("logoutService", logoutService)
-  .service("accessTokenInterceptor", accessTokenInterceptor)
-  .service("responseExtendInterceptor", responseExtendInterceptor)
-  .service("verifyAccessService", verifyAccessService);
+  .service("logoutService", LogoutService)
+  .service("accessTokenInterceptorService", AccessTokenInterceptorService)
+  .service("responseExtendInterceptorService", ResponseExtendInterceptorService)
+  .service("verifyAccessService", VerifyAccessService);
 
 export default Services;
