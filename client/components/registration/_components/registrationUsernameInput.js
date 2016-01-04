@@ -22,4 +22,4 @@ function registrationUsernameInput(registrationService) {
   };
 }
 
-export default usernameInput;
+export default registrationUsernameInput;

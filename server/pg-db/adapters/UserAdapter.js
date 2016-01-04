@@ -9,7 +9,6 @@ class UserAdapter {
     this._comparePassword = this._comparePassword.bind(this);
     this._hashPassword = this._hashPassword.bind(this);
     this.findByUsername = this.findByUsername.bind(this);
-    this.normalizeUsername = this.normalizeUsername.bind(this);
     this.doesUsernameExist = this.doesUsernameExist.bind(this);
   }
 
@@ -75,12 +74,7 @@ class UserAdapter {
     let d = Q.defer();
 
     this.findByUsername(credentials.username).then((user) => {
-      if (!user) {
-        d.reject({
-          success: false,
-          error: "User not found"
-        });
-      } else {
+      if (user) {
         this._comparePassword(credentials.password, user.passwordHash).then(() => {
           d.resolve({
             success: true
@@ -96,13 +90,18 @@ class UserAdapter {
 
           d.reject(rejection);
         });
+      } else {
+        d.reject({
+          success: false,
+          error: "User not found"
+        });
       }
     });
 
     return d.promise;
   }
 
-  normalizeUsername(username) {
+  static normalizeUsername(username) {
     return username.trim().toLocaleLowerCase();
   }
 
@@ -111,7 +110,7 @@ class UserAdapter {
 
     let d = Q.defer();
 
-    credentials.username = this.normalizeUsername(credentials.username);
+    credentials.username = UserAdapter.normalizeUsername(credentials.username);
 
     self.doesUsernameExist(credentials.username).then((exists) => {
       if (exists) {

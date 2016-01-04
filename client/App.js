@@ -5,7 +5,7 @@ global.$ = global.jQuery;
 
 // vendor level dependencies
 import _ from "lodash";
-import * as angular from "angular";
+import angular from "angular";
 import "angular-animate";
 import "angular-ui-router";
 import "angular-local-storage";
@@ -17,9 +17,10 @@ import About from "./components/about/About";
 import Login from "./components/login/Login";
 import Products from "./components/products/Products";
 import Registration from "./components/registration/Registration";
-import accessTokenInterceptor from "./_services/accessTokenInterceptor";
 
 // module level dependencies
+import appConfig from "./appConfig";
+import appRun from "./appRun";
 import AppController from "./AppController";
 
 /* @ngInject */
@@ -38,27 +39,8 @@ const App = angular.module("App",
     Registration.name
   ]);
 
-
-/* @ngInject */
-function appConfig($httpProvider, localStorageServiceProvider, $logProvider) {
-
-  // Intercept all requests to the server, and assign the "x-access-token"; if available
-  $httpProvider.interceptors.push(accessTokenInterceptor);
-
-  // disable use of "success" and "error" methods on promise returned from $http
-  // See https://docs.angularjs.org/error/$http/legacy
-  $httpProvider.useLegacyPromiseExtensions = false;
-
-  // prefix local storage with the application name
-  localStorageServiceProvider.setPrefix("angular-browserify.app");
-  localStorageServiceProvider.setStorageType("localStorage"); // default
-
-  // enable debug
-  // TODO: Update gulpfile to inject the appropriate setting for production builds
-  $logProvider.debugEnabled(true);
-}
-
 App.config(appConfig);
+App.run(appRun);
 
 // AppController is declared on the body element, is not state dependent, and therefore must be explicitly bound to the module
 App.controller("AppController", AppController);

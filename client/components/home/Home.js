@@ -1,20 +1,23 @@
-import angular from 'angular';
-import 'angular-ui-router';
-import HomeController from './HomeController';
-import '../../_services/Services';
-import '../../_constants/Constants';
+import angular from "angular";
+import "angular-ui-router";
+import "angular-messages";
+import HomeController from "./HomeController";
+import Services from "../../_services/Services";
+import Constants from "../../_constants/Constants";
 
-import template from './home.html';
+import template from "./home.html";
 
+const Home = angular.module("Home", [
+  // vendor modules
+  "ui.router",
+  "ngAnimate",
+  "ngMessages",
+  "toastr",
+  "LocalStorageModule",
 
-const Home = angular.module('Home', [
-  'ui.router',
-  'ngAnimate',
-  'ngMessages',
-  'toastr',
-  'LocalStorageModule',
-  'Constants',
-  'Services'
+  // application dependencies
+  Constants.name,
+  Services.name
 ]);
 
 /* @ngInject */
@@ -22,6 +25,8 @@ function homeConfig($stateProvider) {
   $stateProvider.state('home', {
     url: '/home',
     controller: HomeController,
+    controllerAs: "home",
+    auth: true,
     template
   });
 }

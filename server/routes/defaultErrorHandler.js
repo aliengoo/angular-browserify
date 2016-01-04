@@ -1,10 +1,10 @@
 "use strict";
 
-module.exports = function defaultErrorHandler(res) {
-  return function(error) {
-    return res.status(500).json({
-      success: false,
-      error
-    });
-  }
+let HttpStatus = require("http-status");
+
+module.exports = res => {
+  return error => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+    success: false,
+    error
+  });
 };

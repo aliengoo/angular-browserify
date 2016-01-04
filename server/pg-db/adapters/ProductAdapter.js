@@ -1,6 +1,6 @@
 "use strict";
 
-let Q = require('q');
+let Q = require("q");
 
 class ProductAdapter {
   constructor(models) {

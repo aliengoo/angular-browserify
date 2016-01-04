@@ -1,29 +1,30 @@
-import angular from 'angular';
-import 'angular-messages';
-import 'angular-ui-router';
+// vendor dependencies
+import angular from "angular";
 
-// module imports
-import '../../_services/Services';
-import '../../_constants/Constants';
-import '../../_components/Components';
+// application dependencies
+import Services from "../../_services/Services";
+import Constants from "../../_constants/Constants";
+import Components from "../../_components/Components";
 
+// module-level dependencies
 import LoginController from './LoginController';
+import loginUsernameInput from "./_components/loginUsernameInput";
+import loginPasswordInput from "./_components/loginPasswordInput";
+import loginService from "./loginService";
+import LoginServiceTest from "./LoginServiceTest";
+import template from "./login.html";
 
-import loginUsernameInput from './_components/loginUsernameInput';
-import loginPasswordInput from './_components/loginPasswordInput';
-import loginService from './loginService';
-import template from './login.html';
+const Login = angular.module("Login", [
+  // vendor modules
+  "ui.router",
+  "ngAnimate",
+  "ngMessages",
 
-
-const Login = angular.module('Login',
-  [
-    'ui.router',
-    'ngAnimate',
-    'ngMessages',
-    'Components',
-    'Constants',
-    'Services'
-  ]);
+  // application modules
+  Services.name,
+  Constants.name,
+  Components.name
+]);
 
 /* @ngInject */
 function loginConfig($stateProvider) {
@@ -39,7 +40,7 @@ Login
   .directive('loginUsernameInput', loginUsernameInput)
   .directive('loginPasswordInput', loginPasswordInput)
   .service('loginService', loginService)
-  .controller('LoginController', LoginController)
-  .confg(loginConfig);
+  .service('loginServiceTest', LoginServiceTest)
+  .config(loginConfig);
 
 export default Login;

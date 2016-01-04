@@ -1,13 +1,11 @@
 class RegistrationController {
 
   /* @ngInject */
-  constructor($log, registrationService, toastr) {
-    this.name = "registration";
-
+  constructor($log, $state, registrationService, toastr) {
     this.credentials = {
       username: null, password: null
     };
-
+    this.$state = $state;
     this.$log = $log;
     this.registrationService = registrationService;
     this.toastr = toastr;

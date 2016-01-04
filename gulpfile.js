@@ -4,6 +4,7 @@ var lp = require('gulp-load-plugins')({
 });
 var browserify = require('browserify');
 var babelify = require('babelify');
+var stringify = require('stringify');
 var ngAnnotatify = require('browserify-ngannotate');
 var watchify = require('watchify');
 var path = require('path');
@@ -74,6 +75,7 @@ gulp.task("build:js", function (done) {
   args.debug = true;
 
   watchify(browserify(path.join("./client", "App.js"), args), args)
+    .transform(stringify([".html"]))
     .transform(babelify)
     .transform(ngAnnotatify)
     .bundle()
@@ -103,7 +105,7 @@ gulp.task('default', ['vendor:css', 'build:css', 'build:js'], function () {
   lp.livereload({
     start: true
   });
-  gulp.watch(['client/**/*.js'], ["build:js"]);
+  gulp.watch(['client/**/*.js', 'client/**/*.html'], ["build:js"]);
   gulp.watch('client/**/*.scss', ["build:css"]);
 });
 

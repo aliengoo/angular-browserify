@@ -18,8 +18,8 @@ class TokenAdapter {
           username,
           token,
           lastAccessed: Date.now()
-        }, {transaction})
-      })
+        }, {transaction});
+      });
     });
   }
 

@@ -26,6 +26,7 @@
     "express-validator": "^2.18.0",
     "font-awesome": "^4.5.0",
     "gsap": "^1.18.2",
+    "http-status": "^0.2.0",
     "immutable": "^3.7.6",
     "jquery": "^2.1.4",
     "jsonwebtoken": "^5.4.1",

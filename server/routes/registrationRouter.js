@@ -1,10 +1,11 @@
 "use strict";
 
-let router = require('express').Router();
-let UserAdapter = require('../pg-db/adapters/UserAdapter');
-let models = require('../pg-db/models');
-let util = require('util');
-let error = require('./defaultErrorHandler');
+let router = require("express").Router();
+let HttpStatus = require("http-status");
+let UserAdapter = require("../pg-db/adapters/UserAdapter");
+let models = require("../pg-db/models");
+let util = require("util");
+let error = require("./defaultErrorHandler");
 
 let userAdapter = new UserAdapter(models);
 
@@ -16,7 +17,7 @@ router.post('/api/registration/register', (req, res) => {
   let errors = req.validationErrors();
 
   if (errors) {
-    res.status(400).json({
+    res.status(HttpStatus.BAD_REQUEST).json({
       success: false,
       error: util.inspect(errors)
     });
@@ -34,7 +35,7 @@ router.get('/api/registration/does-username-exist', (req, res) => {
   let errors = req.validationErrors();
 
   if (errors) {
-    res.status(400).json({
+    res.status(HttpStatus.BAD_REQUEST).json({
       success: false,
       error: errors
     });

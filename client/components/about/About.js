@@ -1,17 +1,25 @@
-import angular from 'angular';
-import 'angular-ui-router';
-import '../../_components/Components';
-import '../../_services/Services';
-import '../../_constants/Constants';
+// vendor dependencies
+import angular from "angular";
+import "angular-ui-router";
 
-import AboutController from './AboutController';
-import template from './about.html';
+// application dependencies
+import Components from "../../_components/Components";
+import Constants from "../../_constants/Constants";
+import Services from  "../../_services/Services";
 
-const About = angular.module('About', [
-  'ui.router',
-  'Services',
-  'Components',
-  'Constants']);
+// module dependencies
+import AboutController from "./AboutController";
+import template from "./about.html";
+
+const About = angular.module("About", [
+  // vendor modules
+  "ui.router",
+
+  // app modules
+  Components.name,
+  Constants.name,
+  Services.name
+]);
 
 function aboutConfig($stateProvider) {
   $stateProvider.state('about', {

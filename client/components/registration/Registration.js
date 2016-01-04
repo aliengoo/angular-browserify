@@ -1,7 +1,12 @@
+// vendor dependencies
 import angular from "angular";
 import "angular-ui-router";
 import "angular-toastr";
 
+// app dependencies
+import Services from "../../_services/Services";
+
+// module dependencies
 import registrationService from "./registrationService";
 import RegistrationController from "./RegistrationController";
 
@@ -11,10 +16,10 @@ import template from "./registration.html";
 
 // module declaration
 const Registration = angular.module("Registration", [
-  "Services",
   "toastr",
-  "ui.router"]
-);
+  "ui.router",
+  Services.name
+]);
 
 /* @ngInject */
 function registrationConfig($stateProvider) {
@@ -22,6 +27,7 @@ function registrationConfig($stateProvider) {
     url: "/registration",
     controller: RegistrationController,
     controllerAs: "registration",
+    auth: false,
     template
   });
 }

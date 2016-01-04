@@ -1,16 +1,11 @@
+import template from "./errorBlock.html";
+
+/* @ngInject */
 export default function errorBlock() {
-  return {
+    return {
     restrict: "E",
     transclude: true,
-    require: '^form',
     scope: true,
-    template:
-      `
-        <div class="error-block" ng-transclude>
-        </div>
-      `,
-    link: (scope, elements, attributes, formController) => {
-      scope.form = formController;
-    }
+    template
   };
 }

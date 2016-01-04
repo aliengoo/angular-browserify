@@ -1,6 +1,8 @@
 "use strict";
 
-let router = require('express').Router();
+let HttpStatus = require("http-status");
+
+let router = require("express").Router();
 
 let config = require('../config/config');
 let jwt = require('jsonwebtoken');
@@ -16,36 +18,41 @@ router.delete('/api/auth/logout', (req, res) => {
     .then(() => res.json({
       success: true
     }))
-    .catch(error => res.status(500).send(error));
+    .catch(error => res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error));
 });
 
 router.post('/api/authenticate', (req, res) => {
   if (!req.body.username || !req.body.password) {
-    res.status(400).json({
-      success: false,
-      error: "Bad Request"
+    res.status(HttpStatus.UNAUTHORIZED).json({
+      success: false
     });
     return;
   }
 
   userAdapter.authenticate(req.body).then(() => {
-      let token = jwt.sign({
-        username: req.body.username
-      }, config.token.secret, {
-        expiresInMinutes: 1440
-      });
-
-      tokenAdapter.create(req.body.username, token).then(() => {
-        res.json({
-          success: true,
-          message: `Hello, ${req.body.username}`,
-          username: req.body.username,
-          token
-        });
-      }).catch(error => res.status(500).send(error));
-    }, (error) => {
-      res.status(401).json(error);
+    let token = jwt.sign({
+      username: req.body.username
+    }, config.token.secret, {
+      expiresInMinutes: 1440
     });
+
+    tokenAdapter.create(req.body.username, token).then(() => {
+      res.json({
+        success: true,
+        message: `Hello, ${req.body.username}`,
+        username: req.body.username,
+        token
+      });
+    }).catch(() => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      error: "Invalid username or password"
+    }));
+  }, () => {
+    res.status(HttpStatus.UNAUTHORIZED).json({
+      success: false,
+      error: "Invalid username or password"
+    });
+  });
 });
 
 // used by the client to check on their current authorization status.
