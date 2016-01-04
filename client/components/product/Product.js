@@ -26,6 +26,11 @@ const Product = angular.module("Product", [
 ]);
 
 /* @ngInject */
+function resolveExistingProduct($stateParams, productService) {
+  return productService.get($stateParams.id);
+}
+
+/* @ngInject */
 function productConfig($stateProvider) {
   $stateProvider.state('newProduct', {
     url: '/product',
@@ -40,13 +45,12 @@ function productConfig($stateProvider) {
     controllerAs: 'product',
     template: existingProductTemplate,
     resolve: {
-      product: ($stateParams, productService) => productService.get($stateParams.id)
+      product: resolveExistingProduct
     }
   });
 }
 
 Product.config(productConfig);
-
 Product.service('productService', productService);
 
 export default Product;
