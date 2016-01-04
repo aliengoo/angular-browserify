@@ -1,4 +1,3 @@
-
 export default class LoginService {
   /* @ngInject */
   constructor($http, $q, $log, AccessTokenKey, storageService) {

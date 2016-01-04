@@ -1,5 +1,6 @@
 // vendor dependencies
 import angular from "angular";
+import "angular-animate";
 
 // application dependencies
 import Services from "../../_services/Services";
@@ -27,8 +28,8 @@ const Login = angular.module("Login", [
 
 /* @ngInject */
 function loginConfig($stateProvider) {
-  $stateProvider.state('login', {
-    url: '/login',
+  $stateProvider.state("login", {
+    url: "/login",
     controller: LoginController,
     controllerAs: "login",
     template

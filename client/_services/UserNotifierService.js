@@ -1,3 +1,8 @@
+import angular from 'angular';
+
+
+// NOTE: Animations are broken
+// see https://github.com/Foxandxss/angular-toastr/issues/136
 export default class UserNotifierService {
   /* @ngInject */
   constructor($log, toastr) {
@@ -20,4 +25,15 @@ export default class UserNotifierService {
     this.$log.warn(`${title}: ${message}`);
     this.toastr.warn(message, title);
   }
+}
+
+/* @ngInject */
+export function userNotifierServiceConfig(toastrConfig) {
+  //noinspection MagicNumberJS
+  angular.extend(toastrConfig, {
+    positionClass: 'toast-bottom-right',
+    preventDuplicates: true,
+    progressBar: true,
+    timeOut: 3000
+  });
 }

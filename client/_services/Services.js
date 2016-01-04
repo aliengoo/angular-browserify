@@ -1,11 +1,13 @@
 import angular from "angular";
+import "angular-animate";
 import 'angular-local-storage';
 
 import Constants from "../_constants/Constants";
 
 import LogoutService from "./LogoutService";
 import StorageService from "./StorageService";
-import UserNotifierService from "./UserNotifierService";
+import UserNotifierService, {userNotifierServiceConfig} from "./UserNotifierService";
+
 import VerifyAccessService from "./VerifyAccessService";
 
 import AccessTokenInterceptorService from "./AccessTokenInterceptorService";
@@ -15,6 +17,7 @@ const Services = angular.module("Services", [
 
   // vendor moduels
   "LocalStorageModule",
+  "ngAnimate",
   "toastr",
 
   // app modules
@@ -24,9 +27,11 @@ const Services = angular.module("Services", [
 Services
   .service("storageService", StorageService)
   .service("userNotifierService", UserNotifierService)
+  .config(userNotifierServiceConfig)
   .service("logoutService", LogoutService)
   .service("accessTokenInterceptorService", AccessTokenInterceptorService)
   .service("responseExtendInterceptorService", ResponseExtendInterceptorService)
   .service("verifyAccessService", VerifyAccessService);
+
 
 export default Services;

@@ -1,5 +1,6 @@
 import angular from "angular";
 import "angular-ui-router";
+import "angular-animate";
 import "angular-messages";
 import HomeController from "./HomeController";
 import Services from "../../_services/Services";
